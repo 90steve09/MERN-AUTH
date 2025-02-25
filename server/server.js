@@ -3,6 +3,9 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import connectDB from './config/mongodb.js'
+import { authRouter } from './routes/authRoutes.js'
+
+
 
 dotenv.config();
 
@@ -20,8 +23,7 @@ app.get("/",( req, res)=>{
     res.send("WELCOME TO MOBILE BUTO")
 })
 
-
-
+app.use('/api/auth', authRouter)
 
 
 
