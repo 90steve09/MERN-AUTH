@@ -20,7 +20,7 @@ app.use(cors({credentials:true}))
 
 
 app.get("/",( req, res)=>{
-    res.send("WELCOME TO MOBILE BUTO")
+    res.send("WELCOME TO MOBILE ssss ")
 })
 
 app.use('/api/auth', authRouter)

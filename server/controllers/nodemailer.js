@@ -2,12 +2,18 @@ import nodemailer from 'nodemailer'
 
 
 const transporter = nodemailer.createTransport({
-    host: process.env.SMPTP_USER,
+    host: 'smtp-relay.brevo.com',
     port: 587,
-    secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.SENDER_EMAIL, // generated ethereal user
-      pass: process.env.SMPTP_PASSWORD, // generated ethereal password
+  
+      user: '86c890001@smtp-brevo.com', // generated ethereal user
+      pass: 'I2nCDjax7vBOMSbs', // generated ethereal password
+
+
+      // cant work using .env
+      // user: process.env.SMTP_USER, // generated ethereal user
+      // pass: process.env.SMTP_PASSWORD, // generated ethereal password
+
     },
 })
 

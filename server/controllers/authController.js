@@ -33,7 +33,7 @@ export const register = async (req, res) =>{
         })
 
         let info = await transporter.sendMail({
-        from: `"zeev" ${process.env.SENDER_EMAIL}`, // sender address
+        from: process.env.SENDER_EMAIL, // sender address
         to: email, // list of receivers
         subject: "WELCOME TO MY WORLD ✔", // Subject line
         text: `Your Account has been created ${email}`, // plain text body
@@ -44,12 +44,10 @@ export const register = async (req, res) =>{
 
         return res.json({success: true, message:"User Created Successfully"})
 
-      
-
-
+    
         
     } catch (error) {
-        res.json({success: false, message: error.message})
+        res.json({success: false, message: "wewe"})
     }
 }
 
