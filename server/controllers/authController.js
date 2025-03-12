@@ -113,7 +113,7 @@ export const sendVerifyOtp = async (req, res) =>{
     try {
         const {userId} = req.body;
 
-        const user = await userModel.findById({userId})
+        const user = await userModel.findById(userId)
 
         if(user.isAccountVefified){
             return res.json({success:false , message: "Account is Already Verified"})
@@ -121,7 +121,7 @@ export const sendVerifyOtp = async (req, res) =>{
 
         const otp  = String(Math.floor(100000 + Math.random() * 900000))
         
-        user.sendVerifyOtp = otp;
+        user.verifyOtp = otp;
         // expiration in 24hours
         user.verifyOtpExpireAt = Date.now() + 24 * 60 * 60 * 1000;
         user.save();
@@ -138,7 +138,7 @@ export const sendVerifyOtp = async (req, res) =>{
 
 
     } catch (error) {
-        res.json({success: false, message: error.message})
+        res.json({success: false, message: "VERFIY OFTP ERROR"})
     }
 }
 
@@ -148,6 +148,8 @@ export const verifyEmail = async (req, res) =>{
     if(!userId || !otp){
         return res.json({success: false , message: "MISSING DETAILS"})
     }
+    console.log(userId, otp);
+    
 
 
     try {
@@ -158,10 +160,10 @@ export const verifyEmail = async (req, res) =>{
         }
 
         if(user.verifyOtp !== otp || user.verifyOtp === "" ){
-            return res.json({success: false , message: "Invalid OTP"})
+            return res.json({success: false , message: "Invalid OTP ---"})
         }
 
-        if(user.resetOtpExpireAt < Date.now()){
+        if(user.verifyOtpExpireAt < Date.now()){
             return res.json({success: false, message: "OTP EXPIRED"})
         }
 
@@ -172,11 +174,6 @@ export const verifyEmail = async (req, res) =>{
         await user.save()
 
         return res.json({success: true , message: "Email  has been verified Successfully"})
-
-
-        
-    
-
 
     } catch (error) {
         res.json({success: false, message: error.message})
