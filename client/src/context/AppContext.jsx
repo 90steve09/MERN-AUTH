@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { data } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -38,6 +38,10 @@ export const AppContextProvider = (props)=>{
             toast.error(error.messages)
         }
     }
+
+    useEffect(()=>{
+        getAuthState()
+    },[])
 
 
     const value = {
