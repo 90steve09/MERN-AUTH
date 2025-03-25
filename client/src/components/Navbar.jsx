@@ -24,8 +24,8 @@ const Navbar = () => {
          toast.error("Otp failed")
       }
       else{
-        toast.success(data.message)
         navigate('/email-verify')
+        toast.success(data.message)
       }
 
 
