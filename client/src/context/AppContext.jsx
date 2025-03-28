@@ -8,7 +8,7 @@ export const AppContext =  createContext();
 
 export const AppContextProvider = (props)=>{
 
-
+    //using this (axios.defaults.withCredentials = true;) even refresh the page it remain your account otherwise will goto loginhomepage
     axios.defaults.withCredentials = true;
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
